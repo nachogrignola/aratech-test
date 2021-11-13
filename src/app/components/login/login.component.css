@@ -23,4 +23,10 @@ input, input:focus {
     color: #82C26E;
 }
 
+.input-group-append-lg{
+    padding: .5rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+}
+
 
