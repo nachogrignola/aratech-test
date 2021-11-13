@@ -1,0 +1,36 @@
+<div class="container col-lg-6">
+    <form [formGroup]="form" (ngSubmit)="login()">
+    <div class="col-lg-10 mb-2 mt-2 mx-auto">
+        <h2 class="text-center">LOGIN</h2>
+        <span class="text-danger" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">
+            Ingrese un email
+        </span>
+        <span class="text-danger" *ngIf="form.controls.email.errors?.pattern && form.controls.email.touched">
+            Ingrese un email valido
+        </span>
+        <input type="email" class="form-control form-control-lg" formControlName="email" placeholder="Email">
+        <div class="mb-2 mt-2 mx-auto">
+             <span class="text-danger" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">
+                     Ingrese su password
+            </span>
+            <div class="input-group">
+                <input [type]="show ? 'text' : 'password'" class="form-control form-control-lg" formControlName="password"
+                    placeholder="Password" />
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fa input-group-append-lg" [ngClass]="{
+                                      'fa-eye-slash': !fieldTextType,
+                                      'fa-eye': fieldTextType }" 
+                        (click)="toggleFieldTextType()"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="d-grid gap-2 mx-auto">
+            <button class="btn btn-primary btn-lg" type="submit">Ingresar</button>
+        </div>
+    </div>
+</form>
+</div>
+
