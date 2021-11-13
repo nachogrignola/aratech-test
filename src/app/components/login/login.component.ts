@@ -31,14 +31,20 @@ export class LoginComponent implements OnInit {
   
     if (this.form.invalid){
       console.log("invalido")
+      return
     }
-    else {
-      this.user.email = this.form.get('email')?.value
-      this.user.password = this.form.get('password')?.value
-      if (this.serviceLogin.login(this.user)){
-        console.log('next')
-      }
-    }
+    
+    this.user.email = this.form.get('email')?.value
+    this.user.password = this.form.get('password')?.value
+
+    this.serviceLogin.login(this.user).subscribe( data => {
+
+      console.log(data, 'entro al login');
+
+    }, (err) => {
+      console.log(err);
+    })
+
   }
 
 }
