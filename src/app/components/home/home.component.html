@@ -8,4 +8,18 @@
             </div>
         </div>
   </div>
-  
+  <nav class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li *ngIf="paginaActual > 1" class="page-item page-item-cursor">
+        <a class="page-link" (click)="paginaAnterior()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" >{{paginaActual}}</a></li>
+      <li *ngIf="paginaActual !== totalPaginas" class="page-item page-item-cursor">
+        <a class="page-link" (click)="paginaSiguiente()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>

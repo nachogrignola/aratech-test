@@ -12,9 +12,9 @@ export class HomeService {
 
   private url = 'https://reqres.in/api/users'
 
-  cargaUsuarios(){
+  cargaUsuarios(page:number){
 
-    return this.http.get(this.url).pipe( map ((resp:any) => {
+    return this.http.get(`${this.url}?page=${page}`).pipe( map ((resp:any) => {
       return resp
     }))
 

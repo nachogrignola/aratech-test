@@ -12,20 +12,39 @@ export class HomeComponent implements OnInit {
 
   usuarios:any
 
+  totalPaginas = 0
+
+  paginaActual = 1
+
   constructor(private loginService:LoginService, private route:Router, private homeService:HomeService) { }
 
   ngOnInit(): void {
 
-    this.homeService.cargaUsuarios().subscribe(data => {
-      this.usuarios = data.data;
-      console.log(data)
-    })
+    this.obtenerUsuarios();
 
   }
+
+  obtenerUsuarios = () => {
+    this.homeService.cargaUsuarios(this.paginaActual).subscribe(data => {
+      this.usuarios = data.data;
+      this.totalPaginas = data.total_pages
+    })
+
+  } 
 
   desloguearse = () => {
     this.loginService.logout()
     this.route.navigate(['/login'])
   }
+
+  paginaAnterior = () => {
+    this.paginaActual--
+    this.obtenerUsuarios();
+  }
   
+  paginaSiguiente = () => { 
+    this.paginaActual++
+    this.obtenerUsuarios();
+  }
+
 }
