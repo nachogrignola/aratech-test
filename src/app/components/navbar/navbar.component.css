@@ -1,0 +1,14 @@
+.navbar{
+    height: 80px;
+    background-color: #5CB270;
+}
+
+span{
+    color: #fff;
+}
+
+button {
+    color: #fff;
+    background-color: #82C26E;
+    border-color: #82C26E;
+}

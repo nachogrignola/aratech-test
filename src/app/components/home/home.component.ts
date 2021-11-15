@@ -32,11 +32,6 @@ export class HomeComponent implements OnInit {
 
   } 
 
-  desloguearse = () => {
-    this.loginService.logout()
-    this.route.navigate(['/login'])
-  }
-
   paginaAnterior = () => {
     this.paginaActual--
     this.obtenerUsuarios();
