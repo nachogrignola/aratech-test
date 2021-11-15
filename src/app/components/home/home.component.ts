@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HomeService } from 'src/app/services/home.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -9,15 +10,41 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private loginService:LoginService, private route:Router) { }
+  usuarios:any
+
+  totalPaginas = 0
+
+  paginaActual = 1
+
+  constructor(private loginService:LoginService, private route:Router, private homeService:HomeService) { }
 
   ngOnInit(): void {
+
+    this.obtenerUsuarios();
+
   }
 
+  obtenerUsuarios = () => {
+    this.homeService.cargaUsuarios(this.paginaActual).subscribe(data => {
+      this.usuarios = data.data;
+      this.totalPaginas = data.total_pages
+    })
+
+  } 
 
   desloguearse = () => {
     this.loginService.logout()
     this.route.navigate(['/login'])
   }
+
+  paginaAnterior = () => {
+    this.paginaActual--
+    this.obtenerUsuarios();
+  }
   
+  paginaSiguiente = () => { 
+    this.paginaActual++
+    this.obtenerUsuarios();
+  }
+
 }
