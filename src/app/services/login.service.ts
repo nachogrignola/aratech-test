@@ -12,11 +12,10 @@ export class LoginService {
 
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
   private apiKey = 'AIzaSyDcwCxX85CJsQ8gBXJFI_T046JTlshvQqE'
-  /* private usuario$ = new Subject<Usuario>(); */
 
-  /* httpHeaders = {
+  httpHeaders = {
     headers: new HttpHeaders({ skip: 'true' })
-  };  */
+  }; 
 
   constructor(private http: HttpClient) { 
   this.leerToken();
@@ -28,7 +27,7 @@ export class LoginService {
       ...user
     }
 
-    return this.http.post(`${this.url}${this.apiKey}`,AUTHDATA).pipe( map( (resp:any) => {
+    return this.http.post(`${this.url}${this.apiKey}`,AUTHDATA, this.httpHeaders).pipe( map( (resp:any) => {
       this.guardarToken(resp['idToken']);
       return resp
     }));
