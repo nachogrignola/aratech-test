@@ -10,11 +10,14 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomeComponent implements OnInit {
 
+  usuarios:any
+
   constructor(private loginService:LoginService, private route:Router, private homeService:HomeService) { }
 
   ngOnInit(): void {
 
     this.homeService.cargaUsuarios().subscribe(data => {
+      this.usuarios = data.data;
       console.log(data)
     })
 
