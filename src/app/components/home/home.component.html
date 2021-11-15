@@ -1,28 +1,28 @@
 <app-navbar></app-navbar>
-<app-spinner *ngIf="cargando"></app-spinner>
+<app-spinner *ngIf="loading"></app-spinner>
 <div *ngIf="error" class="alert alert-danger text-center" role="alert">
-  Ups.. hubo un error al cargar los usuarios, intente nuevamente
+  Oops.. there was an error to load the page, please try again!
 </div>
 <div class="row mt-2 mx-auto">
-    <div class="col-lg-4 col-md-4 col-sm-4 col-6 mb-2 text-center d-flex justify-content-evenly" *ngFor="let usuario of usuarios">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-6 mb-2 text-center d-flex justify-content-evenly" *ngFor="let user of users">
         <div class="card h-100">
-            <img [src]="usuario.avatar"class="card-img-top" alt="usuario">
+            <img [src]="user.avatar"class="card-img-top" alt="user">
             <div class="card-body">
-              <span class="card-title">{{usuario.email}}</span>
-              <p class="card-text">{{usuario.first_name}} {{usuario.last_name}}</p>
+              <span class="card-title">{{user.email}}</span>
+              <p class="card-text">{{user.first_name}} {{user.last_name}}</p>
             </div>
         </div>
   </div>
-  <nav *ngIf="usuarios.length > 0" class="d-flex justify-content-center">
+  <nav *ngIf="users.length > 0" class="d-flex justify-content-center">
     <ul class="pagination">
-      <li *ngIf="paginaActual > 1" class="page-item page-item-cursor">
-        <a class="page-link" (click)="paginaAnterior()" aria-label="Previous">
+      <li *ngIf="currentPage > 1" class="page-item page-item-cursor">
+        <a class="page-link" (click)="previousPage()" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item"><a class="page-link" >{{paginaActual}}</a></li>
-      <li *ngIf="paginaActual !== totalPaginas" class="page-item page-item-cursor">
-        <a class="page-link" (click)="paginaSiguiente()" aria-label="Next">
+      <li class="page-item"><a class="page-link" >{{currentPage}}</a></li>
+      <li *ngIf="currentPage !== totalPages" class="page-item page-item-cursor">
+        <a class="page-link" (click)="nextPage()" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>

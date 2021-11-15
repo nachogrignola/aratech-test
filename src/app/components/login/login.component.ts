@@ -33,14 +33,14 @@ export class LoginComponent implements OnInit {
   login(){
   
     if (this.form.invalid){
-      this.mostrarError()
+      this.showError()
       return
     }
     
     this.user.email = this.form.get('email')?.value
     this.user.password = this.form.get('password')?.value
 
-    this.cargarRespuesta()
+    this.loadResponse()
 
     this.serviceLogin.login(this.user).subscribe( data => {
 
@@ -48,23 +48,23 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home'])
 
     }, (err) => {
-      this.mostrarError()
+      this.showError()
     })
 
   }
 
-  mostrarError = () => {
+  showError = () => {
     Swal.fire({
       icon:'warning',
-      title:'Error al autenticar',
-      text:'Email o password incorrectos..',
+      title:'Authetication error',
+      text:'Incorrect email or password..',
     })
   }
 
-  cargarRespuesta = () => {
+  loadResponse = () => {
     Swal.fire({
       icon:'info',
-      title:'Espere..',
+      title:'Wait..',
     })
   }
 

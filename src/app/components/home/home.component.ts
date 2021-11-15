@@ -10,13 +10,13 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomeComponent implements OnInit {
 
-  usuarios:any
+  users:any
 
-  totalPaginas = 0
+  totalPages = 0
 
-  paginaActual = 1
+  currentPage = 1
 
-  cargando = false
+  loading = false
 
   error = false
 
@@ -28,29 +28,29 @@ export class HomeComponent implements OnInit {
   }
 
   obtenerUsuarios = () => {
-    this.cargando = true;
-    this.usuarios = [];
+    this.loading = true;
+    this.users = [];
     setTimeout(() => {
-      this.homeService.cargaUsuarios(this.paginaActual).subscribe(data => {
-        this.usuarios = data.data;
-        this.totalPaginas = data.total_pages
-        this.cargando = false;
+      this.homeService.cargaUsuarios(this.currentPage).subscribe(data => {
+        this.users = data.data;
+        this.totalPages = data.total_pages
+        this.loading = false;
       }, err => {
-        this.cargando = false;
+        this.loading = false;
         this.error = true
       })
     }, 300);
     
   } 
 
-  paginaAnterior = () => {
+  previousPage = () => {
     
-    this.paginaActual--
+    this.currentPage--
     this.obtenerUsuarios();
   }
   
-  paginaSiguiente = () => { 
-    this.paginaActual++
+  nextPage = () => { 
+    this.currentPage++
     this.obtenerUsuarios();
   }
 
