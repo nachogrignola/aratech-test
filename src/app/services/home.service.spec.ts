@@ -1,16 +1,30 @@
-import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { HomeService } from './home.service';
 
 describe('HomeService', () => {
   let service: HomeService;
+  let httpClientSpy: { get: jasmine.Spy };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(HomeService);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    service = new HomeService(httpClientSpy as any);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should be two users', () => {
+    const users = [
+      {id:1, name:'user1'}, 
+      {id:2, name:'user2'}
+    ]
+    httpClientSpy.get.and.returnValue(of(users));
+    service.cargaUsuarios(1)
+    expect(service.cargaUsuarios.length).toBe(1);
+    expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
+
+  })
 });
+
