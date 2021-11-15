@@ -10,40 +10,47 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomeComponent implements OnInit {
 
-  usuarios:any
+  users:any
 
-  totalPaginas = 0
+  totalPages = 0
 
-  paginaActual = 1
+  currentPage = 1
+
+  loading = false
+
+  error = false
 
   constructor(private loginService:LoginService, private route:Router, private homeService:HomeService) { }
 
   ngOnInit(): void {
-
     this.obtenerUsuarios();
 
   }
 
   obtenerUsuarios = () => {
-    this.homeService.cargaUsuarios(this.paginaActual).subscribe(data => {
-      this.usuarios = data.data;
-      this.totalPaginas = data.total_pages
-    })
-
+    this.loading = true;
+    this.users = [];
+    setTimeout(() => {
+      this.homeService.cargaUsuarios(this.currentPage).subscribe(data => {
+        this.users = data.data;
+        this.totalPages = data.total_pages
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+        this.error = true
+      })
+    }, 300);
+    
   } 
 
-  desloguearse = () => {
-    this.loginService.logout()
-    this.route.navigate(['/login'])
-  }
-
-  paginaAnterior = () => {
-    this.paginaActual--
+  previousPage = () => {
+    
+    this.currentPage--
     this.obtenerUsuarios();
   }
   
-  paginaSiguiente = () => { 
-    this.paginaActual++
+  nextPage = () => { 
+    this.currentPage++
     this.obtenerUsuarios();
   }
 

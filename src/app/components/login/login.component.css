@@ -24,6 +24,7 @@ input, input:focus {
 }
 
 .input-group-append-lg{
+    width: 40px !important;
     padding: .5rem;
     font-size: 1.25rem;
     border-radius: 0.3rem;

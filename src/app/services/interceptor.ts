@@ -19,7 +19,6 @@ export class Interceptor implements HttpInterceptor {
       request = request.clone({
       headers: request.headers.delete('skip')
     });
-      console.log(request)
       return next.handle(request);
     }
 
