@@ -16,23 +16,35 @@ export class HomeComponent implements OnInit {
 
   paginaActual = 1
 
+  cargando = false
+
+  error = false
+
   constructor(private loginService:LoginService, private route:Router, private homeService:HomeService) { }
 
   ngOnInit(): void {
-
     this.obtenerUsuarios();
 
   }
 
   obtenerUsuarios = () => {
-    this.homeService.cargaUsuarios(this.paginaActual).subscribe(data => {
-      this.usuarios = data.data;
-      this.totalPaginas = data.total_pages
-    })
-
+    this.cargando = true;
+    this.usuarios = [];
+    setTimeout(() => {
+      this.homeService.cargaUsuarios(this.paginaActual).subscribe(data => {
+        this.usuarios = data.data;
+        this.totalPaginas = data.total_pages
+        this.cargando = false;
+      }, err => {
+        this.cargando = false;
+        this.error = true
+      })
+    }, 300);
+    
   } 
 
   paginaAnterior = () => {
+    
     this.paginaActual--
     this.obtenerUsuarios();
   }

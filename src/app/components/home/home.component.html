@@ -1,4 +1,8 @@
 <app-navbar></app-navbar>
+<app-spinner *ngIf="cargando"></app-spinner>
+<div *ngIf="error" class="alert alert-danger text-center" role="alert">
+  Ups.. hubo un error al cargar los usuarios, intente nuevamente
+</div>
 <div class="row mt-2 mx-auto">
     <div class="col-lg-4 col-md-4 col-sm-4 col-6 mb-2 text-center d-flex justify-content-evenly" *ngFor="let usuario of usuarios">
         <div class="card h-100">
@@ -9,7 +13,7 @@
             </div>
         </div>
   </div>
-  <nav class="d-flex justify-content-center">
+  <nav *ngIf="usuarios.length > 0" class="d-flex justify-content-center">
     <ul class="pagination">
       <li *ngIf="paginaActual > 1" class="page-item page-item-cursor">
         <a class="page-link" (click)="paginaAnterior()" aria-label="Previous">
