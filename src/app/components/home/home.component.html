@@ -1,0 +1,25 @@
+<div class="row mt-1 mx-auto">
+    <div class="col-lg-4 mb-2 text-center d-flex justify-content-around" *ngFor="let usuario of usuarios">
+        <div class="card h-100">
+            <img [src]="usuario.avatar"class="card-img-top" alt="usuario">
+            <div class="card-body">
+              <span class="card-title">{{usuario.email}}</span>
+              <p class="card-text">{{usuario.first_name}} {{usuario.last_name}}</p>
+            </div>
+        </div>
+  </div>
+  <nav class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li *ngIf="paginaActual > 1" class="page-item page-item-cursor">
+        <a class="page-link" (click)="paginaAnterior()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" >{{paginaActual}}</a></li>
+      <li *ngIf="paginaActual !== totalPaginas" class="page-item page-item-cursor">
+        <a class="page-link" (click)="paginaSiguiente()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
