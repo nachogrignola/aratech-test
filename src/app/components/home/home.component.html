@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
-<div class="row mt-1 mx-auto">
-    <div class="col-lg-4 mb-2 text-center d-flex justify-content-around" *ngFor="let usuario of usuarios">
+<div class="row mt-2 mx-auto">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-6 mb-2 text-center d-flex justify-content-evenly" *ngFor="let usuario of usuarios">
         <div class="card h-100">
             <img [src]="usuario.avatar"class="card-img-top" alt="usuario">
             <div class="card-body">
