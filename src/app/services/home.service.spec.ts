@@ -21,6 +21,8 @@ describe('HomeService', () => {
       {id:2, name:'user2'}
     ]
     httpClientSpy.get.and.returnValue(of(users));
+    service.cargaUsuarios(1)
+    expect(service.cargaUsuarios.length).toBe(1);
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
 
   })
