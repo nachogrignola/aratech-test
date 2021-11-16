@@ -3,7 +3,7 @@
 <div *ngIf="error" class="alert alert-danger text-center" role="alert">
   Oops.. there was an error to load the page, please try again!
 </div>
-<div class="row mt-2 mx-auto">
+<div class="row mt-4 mx-auto">
     <div class="col-lg-4 col-md-4 col-sm-4 col-6 mb-2 text-center d-flex justify-content-evenly" *ngFor="let user of users">
         <div class="card h-100">
             <img [src]="user.avatar"class="card-img-top" alt="user">
